@@ -1,0 +1,8 @@
+.DS_Store
+compile_commands.json
+
+# Ignore cache folder created by clangd
+.cache
+
+/out*/
+
