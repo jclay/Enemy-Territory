@@ -2,9 +2,10 @@
 ===========================================================================
 
 Wolfenstein: Enemy Territory GPL Source Code
-Copyright (C) 1999-2010 id Software LLC, a ZeniMax Media company. 
+Copyright (C) 1999-2010 id Software LLC, a ZeniMax Media company.
 
-This file is part of the Wolfenstein: Enemy Territory GPL Source Code (Wolf ET Source Code).  
+This file is part of the Wolfenstein: Enemy Territory GPL Source Code (Wolf ET
+Source Code).
 
 Wolf ET Source Code is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,13 +20,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Wolf ET Source Code.  If not, see <http://www.gnu.org/licenses/>.
 
-In addition, the Wolf: ET Source Code is also subject to certain additional terms. You should have received a copy of these additional terms immediately following the terms and conditions of the GNU General Public License which accompanied the Wolf ET Source Code.  If not, please request a copy in writing from id Software at the address below.
+In addition, the Wolf: ET Source Code is also subject to certain additional
+terms. You should have received a copy of these additional terms immediately
+following the terms and conditions of the GNU General Public License which
+accompanied the Wolf ET Source Code.  If not, please request a copy in writing
+from id Software at the address below.
 
-If you have questions concerning this license or the applicable additional terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite 120, Rockville, Maryland 20850 USA.
+If you have questions concerning this license or the applicable additional
+terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
+120, Rockville, Maryland 20850 USA.
 
 ===========================================================================
 */
-
 
 /*****************************************************************************
  * name:		ai_distances.h
@@ -45,9 +51,11 @@ If you have questions concerning this license or the applicable additional terms
 // For when we have a location goal
 #define kBOT_LOC_CLOSE_ENOUGH 40
 
-// When looking for nearby goals (to pick up health/ammo/flags), how far away can we look
+// When looking for nearby goals (to pick up health/ammo/flags), how far away
+// can we look
 #define kBOT_NEARBY_GOAL_DIST 384
-// When looking for nearby goals (to pick up health/ammo/flags), how long can we take to get there
+// When looking for nearby goals (to pick up health/ammo/flags), how long can we
+// take to get there
 #define kBOT_NEARBY_GOAL_TIME 1000
 
 // For goals where we need to touch our target - revive, get disguise, open door
@@ -72,16 +80,17 @@ If you have questions concerning this license or the applicable additional terms
 
 // If our best enemy is this close to us, and we're on an mg42, drop
 // the gun...
-#define kBOT_DROP_MG42_DISTANCE 240 // 20 feet roughly
+#define kBOT_DROP_MG42_DISTANCE 240  // 20 feet roughly
 
 // If our best enemy is this close, and out of our gun arc, drop
 // the mg42
-#define kBOT_DROP_MG42_DISTANCE_OUT_OF_ARC 480 // 40 feet roughly
+#define kBOT_DROP_MG42_DISTANCE_OUT_OF_ARC 480  // 40 feet roughly
 
 // Really way too far for an mg42 to shoot
 #define kBOT_MAX_MG42_TARGET_RANGE 2400
 
-// Radius to call for help - idle friendly bots in this radius are expected to come help their teammates
+// Radius to call for help - idle friendly bots in this radius are expected to
+// come help their teammates
 #define kBOT_HELP_RADIUS 1000
 
 // how close should player be to play the idle animation
@@ -136,7 +145,7 @@ If you have questions concerning this license or the applicable additional terms
 //
 ///////////////////////////////////////
 
-#define kBOT_FOLLOW_SPEED_BONUS ( 1.25f )
+#define kBOT_FOLLOW_SPEED_BONUS (1.25f)
 
 ///////////////////////////////////////
 //
@@ -146,14 +155,14 @@ If you have questions concerning this license or the applicable additional terms
 //
 ///////////////////////////////////////
 
-
 // A short period of time to indicate we were just shot by someone
 #define kBOT_JUST_SHOT_TIME 1000
 
-// Max travel time a bot will spend travelling to heal/give ammo on a give team health/ammo command
-//		NOTE: also checks autonomy range, so this is just an additional check
+// Max travel time a bot will spend travelling to heal/give ammo on a give team
+// health/ammo command
+//		NOTE: also checks autonomy range, so this is just an additional
+//check
 #define kBOT_MAX_RESUPPLY_TRAVEL_TIME 3000
-
 
 //////////////////////////////
 // Combat time constants
@@ -168,7 +177,8 @@ If you have questions concerning this license or the applicable additional terms
 // Random addition for staying at a combat spot
 #define kBOT_RANDOM_COMBAT_SPOT_TIME 5500
 
-// Time to stay at a cover spot if we're switching between it and an exposed spot
+// Time to stay at a cover spot if we're switching between it and an exposed
+// spot
 #define kBOT_MIN_COVERSPOT_TIME_WITH_EXPOSED 12000
 //		and random addition
 #define kBOT_RANDOM_COVERSPOT_TIME_WITH_EXPOSED 4000
@@ -183,7 +193,8 @@ If you have questions concerning this license or the applicable additional terms
 // and random addition
 #define kBOT_COVER_STAND_TIME_RANDOM 1000
 
-// For how long after we've been shot will we do evasive maneuvers (only with no seek cover spot!)
+// For how long after we've been shot will we do evasive maneuvers (only with no
+// seek cover spot!)
 #define kBOT_EVASIVE_MANEUVER_TIME 5000
 
 // How often do we check to see if we can fire
@@ -213,7 +224,8 @@ If you have questions concerning this license or the applicable additional terms
 #define kBOT_RETREAT_UPDATE_TIME 100
 #define kBOT_RETREAT_UPDATE_RANDOM 500
 
-// Damage level below which we never break - this gets modified by the wimp factor
+// Damage level below which we never break - this gets modified by the wimp
+// factor
 #define kBOT_RETREAT_DAMAGE_THRESHOLD 0.75f
 // Damage level at which we are considered to be about to die
 #define kBOT_RETREAT_ABOUT_TO_DIE_DAMAGE 0.8f
@@ -248,15 +260,15 @@ If you have questions concerning this license or the applicable additional terms
 
 // How much to penalize damage ratio based on distance from leader
 // NOTE: 1 == take full damage at max dist, 0 == use scripted ratio
-#define NO_LEADER_DAMAGE_PENALTY ( 0.6f )
+#define NO_LEADER_DAMAGE_PENALTY (0.6f)
 
 // How much to penalize the aiming accuracy based on distance from
 // leader.  1 == can't hit at all, 0 == No penalty
-#define NO_LEADER_MAX_AIM_PENALTY ( 0.5f )
+#define NO_LEADER_MAX_AIM_PENALTY (0.5f)
 
 // how much inaccuracy to remove. e.g. 0.5 = 50% less inaccuracy
-#define AIM_ACCURACY_BONUS_PRONE    0.5
-#define AIM_ACCURACY_BONUS_CROUCH   0.3
-#define AIM_SKILL_BONUS_PRONE       0.5
-#define AIM_ACCURACY_ENEMY_PENALTY_PRONE    0.5
-#define AIM_ACCURACY_ENEMY_PENALTY_CROUCH   0.2
+#define AIM_ACCURACY_BONUS_PRONE 0.5
+#define AIM_ACCURACY_BONUS_CROUCH 0.3
+#define AIM_SKILL_BONUS_PRONE 0.5
+#define AIM_ACCURACY_ENEMY_PENALTY_PRONE 0.5
+#define AIM_ACCURACY_ENEMY_PENALTY_CROUCH 0.2

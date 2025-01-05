@@ -2,9 +2,10 @@
 ===========================================================================
 
 Wolfenstein: Enemy Territory GPL Source Code
-Copyright (C) 1999-2010 id Software LLC, a ZeniMax Media company. 
+Copyright (C) 1999-2010 id Software LLC, a ZeniMax Media company.
 
-This file is part of the Wolfenstein: Enemy Territory GPL Source Code (Wolf ET Source Code).  
+This file is part of the Wolfenstein: Enemy Territory GPL Source Code (Wolf ET
+Source Code).
 
 Wolf ET Source Code is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,9 +20,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Wolf ET Source Code.  If not, see <http://www.gnu.org/licenses/>.
 
-In addition, the Wolf: ET Source Code is also subject to certain additional terms. You should have received a copy of these additional terms immediately following the terms and conditions of the GNU General Public License which accompanied the Wolf ET Source Code.  If not, please request a copy in writing from id Software at the address below.
+In addition, the Wolf: ET Source Code is also subject to certain additional
+terms. You should have received a copy of these additional terms immediately
+following the terms and conditions of the GNU General Public License which
+accompanied the Wolf ET Source Code.  If not, please request a copy in writing
+from id Software at the address below.
 
-If you have questions concerning this license or the applicable additional terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite 120, Rockville, Maryland 20850 USA.
+If you have questions concerning this license or the applicable additional
+terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
+120, Rockville, Maryland 20850 USA.
 
 ===========================================================================
 */
@@ -37,38 +44,41 @@ If you have questions concerning this license or the applicable additional terms
 // rain - don't bother building this in debug builds now, since we
 // aren't calling the signal handler at all
 #ifndef _DEBUG
-static qboolean signalcaught = qfalse;;
+static qboolean signalcaught = qfalse;
+;
 
-void Sys_Exit( int ); // bk010104 - abstraction
+void Sys_Exit(int);  // bk010104 - abstraction
 
-static void signal_handler( int sig ) { // bk010104 - replace this... (NOTE TTimo huh?)
-	if ( signalcaught ) {
-		printf( "DOUBLE SIGNAL FAULT: Received signal %d, exiting...\n", sig );
-		Sys_Exit( 1 ); // bk010104 - abstraction
-	}
+static void signal_handler(
+    int sig) {  // bk010104 - replace this... (NOTE TTimo huh?)
+  if (signalcaught) {
+    printf("DOUBLE SIGNAL FAULT: Received signal %d, exiting...\n", sig);
+    Sys_Exit(1);  // bk010104 - abstraction
+  }
 
-	signalcaught = qtrue;
-	printf( "Received signal %d, exiting...\n", sig );
+  signalcaught = qtrue;
+  printf("Received signal %d, exiting...\n", sig);
 #ifndef DEDICATED
-	GLimp_Shutdown(); // bk010104 - shouldn't this be CL_Shutdown
+  GLimp_Shutdown();  // bk010104 - shouldn't this be CL_Shutdown
 #endif
-	Sys_Exit( 0 ); // bk010104 - abstraction NOTE TTimo send a 0 to avoid DOUBLE SIGNAL FAULT
+  Sys_Exit(0);  // bk010104 - abstraction NOTE TTimo send a 0 to avoid DOUBLE
+                // SIGNAL FAULT
 }
 #endif
 
-void InitSig( void ) {
-//bani - allows debug builds to core...
+void InitSig(void) {
+// bani - allows debug builds to core...
 #ifndef _DEBUG
-	signal( SIGHUP, signal_handler );
-	signal( SIGINT, signal_handler );
-	signal( SIGQUIT, signal_handler );
-	signal( SIGILL, signal_handler );
-	signal( SIGTRAP, signal_handler );
-	signal( SIGIOT, signal_handler );
-	signal( SIGBUS, signal_handler );
-	signal( SIGFPE, signal_handler );
-	signal( SIGKILL, signal_handler );
-	signal( SIGSEGV, signal_handler );
-	signal( SIGTERM, signal_handler );
+  signal(SIGHUP, signal_handler);
+  signal(SIGINT, signal_handler);
+  signal(SIGQUIT, signal_handler);
+  signal(SIGILL, signal_handler);
+  signal(SIGTRAP, signal_handler);
+  signal(SIGIOT, signal_handler);
+  signal(SIGBUS, signal_handler);
+  signal(SIGFPE, signal_handler);
+  signal(SIGKILL, signal_handler);
+  signal(SIGSEGV, signal_handler);
+  signal(SIGTERM, signal_handler);
 #endif
 }

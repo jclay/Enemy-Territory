@@ -2,9 +2,10 @@
 ===========================================================================
 
 Wolfenstein: Enemy Territory GPL Source Code
-Copyright (C) 1999-2010 id Software LLC, a ZeniMax Media company. 
+Copyright (C) 1999-2010 id Software LLC, a ZeniMax Media company.
 
-This file is part of the Wolfenstein: Enemy Territory GPL Source Code (Wolf ET Source Code).  
+This file is part of the Wolfenstein: Enemy Territory GPL Source Code (Wolf ET
+Source Code).
 
 Wolf ET Source Code is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,141 +20,143 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Wolf ET Source Code.  If not, see <http://www.gnu.org/licenses/>.
 
-In addition, the Wolf: ET Source Code is also subject to certain additional terms. You should have received a copy of these additional terms immediately following the terms and conditions of the GNU General Public License which accompanied the Wolf ET Source Code.  If not, please request a copy in writing from id Software at the address below.
+In addition, the Wolf: ET Source Code is also subject to certain additional
+terms. You should have received a copy of these additional terms immediately
+following the terms and conditions of the GNU General Public License which
+accompanied the Wolf ET Source Code.  If not, please request a copy in writing
+from id Software at the address below.
 
-If you have questions concerning this license or the applicable additional terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite 120, Rockville, Maryland 20850 USA.
+If you have questions concerning this license or the applicable additional
+terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
+120, Rockville, Maryland 20850 USA.
 
 ===========================================================================
 */
 
 #include <ctype.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-int stricmp( const char *s1, const char *s2 ) {
-	char c1, c2;
-	while ( 1 )
-	{
-		c1 = tolower( *s1++ );
-		c2 = tolower( *s2++ );
-		if ( c1 < c2 ) {
-			return -1;
-		}
-		if ( c1 > c2 ) {
-			return 1;
-		}
-		if ( c1 == 0 ) {
-			return 0;
-		}
-	}
+int stricmp(const char* s1, const char* s2) {
+  char c1, c2;
+  while (1) {
+    c1 = tolower(*s1++);
+    c2 = tolower(*s2++);
+    if (c1 < c2) {
+      return -1;
+    }
+    if (c1 > c2) {
+      return 1;
+    }
+    if (c1 == 0) {
+      return 0;
+    }
+  }
 }
-int strnicmp( const char *s1, const char *s2, unsigned long n ) {
-	int i;
-	char c1, c2;
-	for ( i = 0; i < n; i++ )
-	{
-		c1 = tolower( *s1++ );
-		c2 = tolower( *s2++ );
-		if ( c1 < c2 ) {
-			return -1;
-		}
-		if ( c1 > c2 ) {
-			return 1;
-		}
-		if ( !c1 ) {
-			return 0;
-		}
-	}
-	return 0;
+int strnicmp(const char* s1, const char* s2, unsigned long n) {
+  int i;
+  char c1, c2;
+  for (i = 0; i < n; i++) {
+    c1 = tolower(*s1++);
+    c2 = tolower(*s2++);
+    if (c1 < c2) {
+      return -1;
+    }
+    if (c1 > c2) {
+      return 1;
+    }
+    if (!c1) {
+      return 0;
+    }
+  }
+  return 0;
 }
 
-char* strlwr( char *string ) {
-	char *s = string;
+char* strlwr(char* string) {
+  char* s = string;
 
-	while ( *s )
-	{
-		*s = tolower( *s );
-		s++;
-	}
+  while (*s) {
+    *s = tolower(*s);
+    s++;
+  }
 
-	return string;
+  return string;
 }
 
-char* strupr( char *string ) {
-	char *s = string;
+char* strupr(char* string) {
+  char* s = string;
 
-	while ( *s )
-	{
-		*s = toupper( *s );
-		s++;
-	}
+  while (*s) {
+    *s = toupper(*s);
+    s++;
+  }
 
-	return string;
+  return string;
 }
 
-char* strrev( char *str ) {
-	int SmallIndex = 0;
-	int BigIndex = strlen( str ) - 1;
+char* strrev(char* str) {
+  int SmallIndex = 0;
+  int BigIndex = strlen(str) - 1;
 
-	while ( SmallIndex < BigIndex ) {
-		char Temp = str[SmallIndex];
+  while (SmallIndex < BigIndex) {
+    char Temp = str[SmallIndex];
 
-		str[SmallIndex] = str[BigIndex];
-		str[BigIndex] = Temp;
+    str[SmallIndex] = str[BigIndex];
+    str[BigIndex] = Temp;
 
-		SmallIndex++;
-		BigIndex--;
-	}
+    SmallIndex++;
+    BigIndex--;
+  }
 
-	return str;
+  return str;
 }
 
-char* itoa( int val, char *str, int radix ) {
-	char IsNegative = 0;
-	int theNum = val;
-	int StrIndex = 0;
+char* itoa(int val, char* str, int radix) {
+  char IsNegative = 0;
+  int theNum = val;
+  int StrIndex = 0;
 
-	if ( theNum < 0 ) {
-		theNum = -theNum;
-		IsNegative = 1;
-	}
+  if (theNum < 0) {
+    theNum = -theNum;
+    IsNegative = 1;
+  }
 
-	do {
-		int CurDigit = theNum % radix;
-		if ( CurDigit > 9 ) {
-			str[StrIndex++] = CurDigit + 'A' - 10;
-		} else {
-			str[StrIndex++] = CurDigit + '0';
-		}
+  do {
+    int CurDigit = theNum % radix;
+    if (CurDigit > 9) {
+      str[StrIndex++] = CurDigit + 'A' - 10;
+    } else {
+      str[StrIndex++] = CurDigit + '0';
+    }
 
-		theNum /= radix;
-	} while ( theNum );
+    theNum /= radix;
+  } while (theNum);
 
-	if ( IsNegative ) {
-		str[StrIndex++] = '-';
-	}
-	str[StrIndex++] = 0;
+  if (IsNegative) {
+    str[StrIndex++] = '-';
+  }
+  str[StrIndex++] = 0;
 
-	// Now reverse the string.
-#ifdef __MACH__ // jcb, 11/10/03
-	strrev( str );
+  // Now reverse the string.
+#ifdef __MACH__  // jcb, 11/10/03
+  strrev(str);
 #else
-	_strrev( str );
+  _strrev(str);
 #endif
 
-	return str;
+  return str;
 }
 
 #ifdef __cplusplus
 }
 #endif
 
-//extern "C" { extern void DebugStr (unsigned char *); }
-//extern void	Sys_Print( const char *text );
-void OutputDebugString( const char * s ) {
+// extern "C" { extern void DebugStr (unsigned char *); }
+// extern void	Sys_Print( const char *text );
+void OutputDebugString(const char* s) {
 #ifdef _DEBUG
 //	Sys_Print (s);
 //	DebugStr((unsigned char *)s);
