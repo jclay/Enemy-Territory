@@ -383,7 +383,7 @@ srfGridMesh_t* R_SubdividePatchToGrid(
   float len, maxLen;
   int dir;
   int t;
-  MAC_STATIC drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE];
+  drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE];
   float errorTable[2][MAX_GRID_SIZE];
 
   for (i = 0; i < width; i++) {
@@ -544,7 +544,7 @@ srfGridMesh_t* R_GridInsertColumn(srfGridMesh_t* grid,
                                   float loderror) {
   int i, j;
   int width, height, oldwidth;
-  MAC_STATIC drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE];
+  drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE];
   float errorTable[2][MAX_GRID_SIZE];
   float lodRadius;
   vec3_t lodOrigin;
@@ -605,7 +605,7 @@ srfGridMesh_t* R_GridInsertRow(srfGridMesh_t* grid,
                                float loderror) {
   int i, j;
   int width, height, oldheight;
-  MAC_STATIC drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE];
+  drawVert_t ctrl[MAX_GRID_SIZE][MAX_GRID_SIZE];
   float errorTable[2][MAX_GRID_SIZE];
   float lodRadius;
   vec3_t lodOrigin;

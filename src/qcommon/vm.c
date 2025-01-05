@@ -331,7 +331,7 @@ Dlls will call this directly
 ============
 */
 int QDECL VM_DllSyscall(int arg, ...) {
-#if ((defined __linux__) && (defined __powerpc__))  //|| (defined MACOS_X)
+#if ((defined __linux__) && (defined __powerpc__))  //|| (defined TARGET_OS_MAC)
   // rcg010206 - see commentary above
   int args[16];
   int i;
@@ -666,7 +666,7 @@ int QDECL VM_Call(vm_t* vm, int callnum, ...) {
   vm_t* oldVM;
   int r;
   // rcg010207 see dissertation at top of VM_DllSyscall() in this file.
-#if ((defined __linux__) && (defined __powerpc__)) || (defined MACOS_X)
+#if ((defined __linux__) && (defined __powerpc__)) || (defined TARGET_OS_MAC)
   int i;
   int args[16];
   va_list ap;
@@ -687,7 +687,7 @@ int QDECL VM_Call(vm_t* vm, int callnum, ...) {
   // if we have a dll loaded, call it directly
   if (vm->entryPoint) {
     // rcg010207 -  see dissertation at top of VM_DllSyscall() in this file.
-#if ((defined __linux__) && (defined __powerpc__)) || (defined MACOS_X)
+#if ((defined __linux__) && (defined __powerpc__)) || (defined TARGET_OS_MAC)
     va_start(ap, callnum);
     for (i = 0; i < sizeof(args) / sizeof(args[i]); i++)
       args[i] = va_arg(ap, int);
@@ -831,7 +831,7 @@ void VM_LogSyscalls(int* args) {
           args[4]);
 }
 
-#if defined(__MACOS__)
+#if defined(TARGET_OS_MAC)
 #define DLL_ONLY  // DAJ
 #endif
 

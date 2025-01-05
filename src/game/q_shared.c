@@ -39,7 +39,7 @@ terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
 // os x game bundles have no standard library links, and the defines are not
 // always defined!
 
-#ifdef MACOS_X
+#ifdef __APPLE__
 int qmax(int x, int y) {
   return (((x) > (y)) ? (x) : (y));
 }

@@ -1300,7 +1300,7 @@ int FS_FOpenFileRead(const char* filename,
             && Q_stricmp(filename + l - 4, ".dat")  // for journal files
             && Q_stricmp(filename + l - 8, "bots.txt") &&
             Q_stricmp(filename + l - 8, ".botents")
-#ifdef __MACOS__
+#ifdef __APPLE__
             // even when pure is on, let the server game be loaded
             && Q_stricmp(filename, "qagame_mac")
 #endif

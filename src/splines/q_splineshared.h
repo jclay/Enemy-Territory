@@ -104,8 +104,6 @@ terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
 
 #ifdef WIN32
 
-#define MAC_STATIC
-
 #undef QDECL
 #define QDECL __cdecl
 
@@ -132,9 +130,6 @@ terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
 
 #ifdef __MACOS__
 
-// DAJ #define	MAC_STATIC static
-#define MAC_STATIC
-
 #define CPUSTRING "MacOS-PPC"
 
 #define PATH_SEP ':'
@@ -144,8 +139,6 @@ void Sys_PumpEvents(void);
 #endif
 
 #ifdef __MRC__
-
-#define MAC_STATIC
 
 #define CPUSTRING "MacOS-PPC"
 
@@ -164,8 +157,6 @@ void Sys_PumpEvents(void);
 // the mac compiler can't handle >32k of locals, so we
 // just waste space and make big arrays static...
 #ifdef __linux__
-
-#define MAC_STATIC
 
 #ifdef __i386__
 #define CPUSTRING "linux-i386"

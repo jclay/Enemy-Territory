@@ -33,12 +33,9 @@ terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
 ===========================================================================
 */
 
-// ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //  Defines general to all Quake 3 engine games
-// ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
-#ifndef __MACOS__
-#define __MACOS__ 1  // needed for MrC
-#endif
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 #define MAC_PORT 1
 
 #if !TARGET_RT_MAC_MACHO
@@ -93,10 +90,6 @@ extern "C"
 // Under Mach-O, in the MSL headers, PATH_MAX is defined, _MAX_PATH is
 // Under CFM, PATH_MAX isn't defined, _MAX_PATH is
 
-#if __MWERKS__  // LBO - for _MAX_PATH
-#include <stdlib.h>
-#endif
-
 #ifndef _MAX_PATH
 #define _MAX_PATH PATH_MAX
 #else
@@ -126,10 +119,5 @@ typedef struct tagPOINT {
   LONG x;
   LONG y;
 } POINT;
-
-#ifdef __MWERKS__
-#pragma cpp_extensions on
-#pragma gcc_extensions on
-#endif
 
 #include "MacPrefix_GameSpecific.h"

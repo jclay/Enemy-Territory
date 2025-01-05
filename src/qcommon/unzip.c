@@ -42,8 +42,10 @@ terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
  *
  *****************************************************************************/
 
-#include "unzip.h"
-#include "../client/client.h"
+#include "qcommon/unzip.h"
+
+#include "game/q_shared.h"
+#include "qcommon/qcommon.h"
 
 /* unzip.h -- IO for uncompress .zip files using zlib
    Version 0.15 beta, Mar 19th, 1998,
@@ -2029,7 +2031,7 @@ extern int unzReadCurrentFile(unzFile file, void* buf, unsigned len) {
             *(pfile_in_zip_read_info->stream.next_in + i);
 
       //			pfile_in_zip_read_info->crc32 =
-      //crc32(pfile_in_zip_read_info->crc32,
+      // crc32(pfile_in_zip_read_info->crc32,
       //								pfile_in_zip_read_info->stream.next_out,
       //								uDoCopy);
       pfile_in_zip_read_info->rest_read_uncompressed -= uDoCopy;
@@ -2434,12 +2436,15 @@ struct inflate_blocks_state {
     z->total_in += p - z->next_in; \
     z->next_in = p;                \
   }
-#define UPDOUT \
-  { s->write = q; }
-#define UPDATE \
-  { UPDBITS UPDIN UPDOUT }
-#define LEAVE \
-  { UPDATE return inflate_flush(s, z, r); }
+#define UPDOUT    \
+  {               \
+    s->write = q; \
+  }
+#define UPDATE {UPDBITS UPDIN UPDOUT}
+#define LEAVE                             \
+  {                                       \
+    UPDATE return inflate_flush(s, z, r); \
+  }
 /*   get bytes and bits */
 #define LOADIN       \
   {                  \
@@ -2503,8 +2508,7 @@ struct inflate_blocks_state {
     m--;              \
   }
 /*   load static pointers */
-#define LOAD \
-  { LOADIN LOADOUT }
+#define LOAD {LOADIN LOADOUT}
 
 /* masks for lower bits (size given to avoid silly warnings with Visual C++) */
 static uInt inflate_mask[17];

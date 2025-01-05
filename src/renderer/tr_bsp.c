@@ -212,7 +212,7 @@ R_LoadLightmaps
 static void R_LoadLightmaps(lump_t* l) {
   byte *buf, *buf_p, *image_p;
   int len;
-  MAC_STATIC byte image[LIGHTMAP_SIZE * LIGHTMAP_SIZE * 4];
+  byte image[LIGHTMAP_SIZE * LIGHTMAP_SIZE * 4];
   int i /*, j*/;
   float intensity, maxIntensity = 0;
   //	double sumIntensity = 0;
@@ -427,7 +427,7 @@ static void ParseMesh(dsurface_t* ds, drawVert_t* verts, msurface_t* surf) {
   srfGridMesh_t* grid;
   int i, j;
   int width, height, numPoints;
-  MAC_STATIC drawVert_t points[MAX_PATCH_SIZE * MAX_PATCH_SIZE];
+  drawVert_t points[MAX_PATCH_SIZE * MAX_PATCH_SIZE];
   int lightmapNum;
   vec3_t bounds[2];
   vec3_t tmpVec;
@@ -2416,7 +2416,7 @@ void R_FindLightGridBounds(vec3_t mins, vec3_t maxs) {
   //		db = &dbrushes[i];
   //
   //		if (!(dshaders[db->shaderNum].contentFlags &
-  //CONTENTS_LIGHTGRID)) { 			continue;
+  // CONTENTS_LIGHTGRID)) { 			continue;
   //		}
   //
   //		foundGridBrushes = qtrue;
@@ -2426,13 +2426,18 @@ void R_FindLightGridBounds(vec3_t mins, vec3_t maxs) {
   //			s = &dbrushsides[ db->firstSide + j ];
   //
   //			surfmin[0] = -dplanes[ dbrushsides[ db->firstSide + 0
-  //].planeNum ].dist - 1; 			surfmin[1] = -dplanes[ dbrushsides[ db->firstSide + 2
-  //].planeNum ].dist - 1; 			surfmin[2] = -dplanes[ dbrushsides[ db->firstSide + 4
-  //].planeNum ].dist - 1; 			surfmax[0] = dplanes[ dbrushsides[ db->firstSide + 1
-  //].planeNum ].dist + 1; 			surfmax[1] = dplanes[ dbrushsides[ db->firstSide + 3
-  //].planeNum ].dist + 1; 			surfmax[2] = dplanes[ dbrushsides[ db->firstSide + 5
-  //].planeNum ].dist + 1; 			AddPointToBounds (surfmin, mins, maxs);
-  //			AddPointToBounds (surfmax, mins, maxs);
+  //].planeNum ].dist - 1; 			surfmin[1] = -dplanes[
+  //dbrushsides[ db->firstSide + 2
+  //].planeNum ].dist - 1; 			surfmin[2] = -dplanes[
+  //dbrushsides[ db->firstSide + 4
+  //].planeNum ].dist - 1; 			surfmax[0] = dplanes[
+  //dbrushsides[ db->firstSide + 1
+  //].planeNum ].dist + 1; 			surfmax[1] = dplanes[
+  //dbrushsides[ db->firstSide + 3
+  //].planeNum ].dist + 1; 			surfmax[2] = dplanes[
+  //dbrushsides[ db->firstSide + 5
+  //].planeNum ].dist + 1; 			AddPointToBounds (surfmin, mins,
+  //maxs); 			AddPointToBounds (surfmax, mins, maxs);
   //		}
   //	}
 
@@ -2620,7 +2625,8 @@ void RE_LoadWorldMap(const char* name) {
   // TODO:(SA)this is sort of silly.  I'm going to do a general cleanup on fog
   // stuff
   //			now that I can see how it's been used.  (functionality
-  //can narrow since 			it's not used as much as it's designed for.)
+  // can narrow since 			it's not used as much as it's designed
+  // for.)
   R_SetFog(FOG_SKY, 0, 0, 0, 0, 0, 0);
   R_SetFog(FOG_PORTALVIEW, 0, 0, 0, 0, 0, 0);
   R_SetFog(FOG_HUD, 0, 0, 0, 0, 0, 0);

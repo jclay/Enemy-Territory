@@ -38,7 +38,12 @@ terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
 #ifndef _QCOMMON_H_
 #define _QCOMMON_H_
 
-#include "../qcommon/cm_public.h"
+#include "game/q_shared.h"
+#include "qcommon/cm_public.h"
+
+#if defined(__APPLE__)
+#include <unistd.h>  // rmdir
+#endif
 
 // bani
 #ifdef __GNUC__
@@ -1354,7 +1359,7 @@ void Com_GetHunkInfo(int* hunkused, int* hunkexpected);
 #define SYS_DLLNAME_UI_SHIFT 5
 #define SYS_DLLNAME_UI "zn3ru3n8=;3xt"
 
-#elif __MACOS__
+#elif defined(__APPLE__)
 
 #ifdef _DEBUG
 // qagame_d_mac

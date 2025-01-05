@@ -160,8 +160,6 @@ terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
 
 #ifdef WIN32
 
-#define MAC_STATIC
-
 #undef QDECL
 #define QDECL __cdecl
 
@@ -184,64 +182,9 @@ terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
 
 #endif
 
-//======================= MAC OS X SERVER DEFINES =====================
-
-#if defined(MACOS_X)
-
-#error WTF
-
-#define MAC_STATIC
-
-#define CPUSTRING "MacOS_X"
-
-#define PATH_SEP '/'
-
-// Vanilla PPC code, but since PPC has a reciprocal square root estimate
-// instruction, runs *much* faster than calling sqrt(). We'll use two
-// Newton-Raphson refinement steps to get bunch more precision in the 1/sqrt()
-// value for very little cost. We'll then multiply 1/sqrt times the original
-// value to get the sqrt. This is about 12.4 times faster than sqrt() and
-// according to my testing (not exhaustive) it returns fairly accurate results
-// (error below 1.0e-5 up to 100000.0 in 0.1 increments).
-
-static inline float idSqrt(float x) {
-  const float half = 0.5;
-  const float one = 1.0;
-  float B, y0, y1;
-
-  // This'll NaN if it hits frsqrte. Handle both +0.0 and -0.0
-  if (Q_fabs(x) == 0.0) {
-    return x;
-  }
-  B = x;
-
-#ifdef __GNUC__
-  asm("frsqrte %0,%1" : "=f"(y0) : "f"(B));
-#else
-  y0 = __frsqrte(B);
-#endif
-  /* First refinement step */
-
-  y1 = y0 + half * y0 * (one - B * y0 * y0);
-
-  /* Second refinement step -- copy the output of the last step to the input of
-   * this step */
-
-  y0 = y1;
-  y1 = y0 + half * y0 * (one - B * y0 * y0);
-
-  /* Get sqrt(x) from x * 1/sqrt(x) */
-  return x * y1;
-}
-#define sqrt idSqrt
-
-#endif
-
 //======================= MAC DEFINES =================================
 
-#ifdef __MACOS__
-
-#define MAC_STATIC
+#ifdef __APPLE__
 
 #define CPUSTRING "OSX-universal"
 
@@ -256,8 +199,6 @@ void Sys_PumpEvents(void);
 // the mac compiler can't handle >32k of locals, so we
 // just waste space and make big arrays static...
 #ifdef __linux__
-
-#define MAC_STATIC
 
 #ifdef __i386__
 #define CPUSTRING "linux-i386"
@@ -628,7 +569,7 @@ float Q_rsqrt(float f);  // reciprocal square root
     !((defined __linux__ || defined __FreeBSD__ || defined __GNUC__) && \
       (defined __i386__))  // rb010123
 long myftol(float f);
-#elif defined(__MACOS__)
+#elif defined(__APPLE__)
 #define myftol(x) (long)(x)
 #else
 extern long int lrintf(float x);
@@ -920,7 +861,7 @@ char* Q_CleanStr(char* string);
 char* Q_CleanDirName(char* dirname);
 
 #define _vsnprintf use_Q_vsnprintf
-#define vsnprintf use_Q_vsnprintf
+// #define vsnprintf use_Q_vsnprintf
 int Q_vsnprintf(char* dest, int size, const char* fmt, va_list argptr);
 
 //=============================================
@@ -1426,10 +1367,10 @@ typedef struct playerState_s {
   float aimSpreadScaleFloat;  // (SA) the server-side aimspreadscale that lets
                               // it track finer changes but still only transmit
                               // the 8bit int to the client
-  int aimSpreadScale;  // 0 - 255 increases with angular movement
-                       // // Arnout : DOES get send over the network
-  int lastFireTime;    // used by server to hold last firing frame briefly when
-                       // randomly releasing trigger (AI)
+  int aimSpreadScale;         // 0 - 255 increases with angular movement
+                              // // Arnout : DOES get send over the network
+  int lastFireTime;  // used by server to hold last firing frame briefly when
+                     // randomly releasing trigger (AI)
 
   int quickGrenTime;
 
@@ -1529,7 +1470,7 @@ typedef enum {
   TR_LINEAR,
   TR_LINEAR_STOP,
   TR_LINEAR_STOP_BACK,  //----(SA)	added.  so reverse movement can be
-                        //different than forward
+                        // different than forward
   TR_SINE,              // value = base + sin( time / duration ) * delta
   TR_GRAVITY,
   // Ridah
@@ -1537,7 +1478,8 @@ typedef enum {
   TR_GRAVITY_FLOAT,   // super low grav with no gravity acceleration (floating
                       // feathers/fabric/leaves/...)
   TR_GRAVITY_PAUSED,  //----(SA)	has stopped, but will still do a short
-                      //trace to see if it should be switched back to TR_GRAVITY
+                      // trace to see if it should be switched back to
+                      // TR_GRAVITY
   TR_ACCELERATE,
   TR_DECCELERATE,
   // Gordon
@@ -1703,7 +1645,8 @@ typedef struct entityState_s {
   int weapon;     // determines weapon and flash model, etc
   int legsAnim;   // mask off ANIM_TOGGLEBIT
   int torsoAnim;  // mask off ANIM_TOGGLEBIT
-                  //	int		weapAnim;		// mask off ANIM_TOGGLEBIT
+                  //	int		weapAnim;		// mask off
+                  // ANIM_TOGGLEBIT
                   ////----(SA)	removed (weap anims will be client-side only)
 
   int density;  // for particle effects
@@ -1818,7 +1761,7 @@ typedef enum _flag_status {
 
 // NERVE - SMF - localization
 typedef enum {
-#ifndef __MACOS__  // DAJ USA
+#ifndef TARGET_OS_MAC  // DAJ USA
   LANGUAGE_FRENCH = 0,
   LANGUAGE_GERMAN,
   LANGUAGE_ITALIAN,

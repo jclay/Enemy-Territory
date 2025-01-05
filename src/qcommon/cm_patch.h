@@ -33,6 +33,8 @@ terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite
 ===========================================================================
 */
 
+#include "game/q_shared.h"
+
 // #define	CULL_BBOX
 
 /*
